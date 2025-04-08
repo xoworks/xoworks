@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "id": "classic",
+      "name": "Classic",
+      "prompt": "$"
+    },
+    {
+      "id": "dark",
+      "name": "Dark",
+      "prompt": ">"
+    },
+    {
+      "id": "light",
+      "name": "Light",
+      "prompt": "λ"
+    },
+    {
+      "id": "green",
+      "name": "Retro (Green)",
+      "prompt": ">"
+    },
+    {
+      "id": "amber",
+      "name": "Retro (Amber)",
+      "prompt": ">"
+    },
+    {
+      "id": "solarized",
+      "name": "Solarized",
+      "prompt": ">"
+    },
+    {
+      "id": "chicago",
+      "name": "Chicago",
+      "prompt": "C:\\>"
+    },
+    {
+      "id": "synthwave",
+      "name": "Synthwave",
+      "prompt": "=>"
+    },
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "prompt": "$"
+    }
+  ]
+}
