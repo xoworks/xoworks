@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { DM_Mono } from 'next/font/google';
 
 import { ThemeProvider } from '../contexts/ThemeContext';
@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   description: 'Expert IT consulting services tailored to your business needs',
   keywords:
     'IT consulting, software development, cloud architecture, DevOps, cybersecurity',
+};
+
+export const viewport: Viewport = {
   themeColor: '#000000',
 };
 
