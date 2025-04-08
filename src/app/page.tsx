@@ -1,5 +1,9 @@
 import Terminal from '../components/Terminal';
 
 export default function Home() {
-  return <Terminal />;
+  return (
+    <main role="main">
+      <Terminal />
+    </main>
+  );
 }

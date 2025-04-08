@@ -34,3 +34,49 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Testing
+
+This project uses Playwright for end-to-end testing.
+
+### Running Tests
+
+To run all tests:
+
+```bash
+pnpm test
+```
+
+To run tests with UI mode for debugging:
+
+```bash
+pnpm test:ui
+```
+
+### Component-specific Tests
+
+Run specific test suites:
+
+```bash
+# Test terminal functionality
+pnpm test:terminal
+
+# Test theme functionality
+pnpm test:theme
+
+# Test component interactions
+pnpm test:component
+
+# Test accessibility
+pnpm test:a11y
+```
+
+### Writing Tests
+
+Tests are located in the `tests` directory and follow these conventions:
+
+- `home.spec.ts`: Basic page load tests
+- `terminal.spec.ts`: Terminal component tests
+- `theme.spec.ts`: Theme switching tests
+- `component.spec.ts`: Complex component interaction tests
+- `accessibility.spec.ts`: Accessibility validation tests

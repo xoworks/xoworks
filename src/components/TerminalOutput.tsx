@@ -1,14 +1,17 @@
+/** @jsxImportSource react */
 'use client';
 
-import React from 'react';
+import type { FC } from 'react';
 
 import { TerminalLine } from '../hooks/useTerminalBoot';
+
+/** @jsxImportSource react */
 
 interface TerminalOutputProps {
   history: TerminalLine[];
 }
 
-export const TerminalOutput: React.FC<TerminalOutputProps> = ({ history }) => {
+const TerminalOutput: FC<TerminalOutputProps> = ({ history }) => {
   // Render terminal line content
   const renderLineContent = (line: TerminalLine) => {
     if (!line || !line.content) return null;
@@ -77,7 +80,11 @@ export const TerminalOutput: React.FC<TerminalOutputProps> = ({ history }) => {
         }
 
         // Make social media links clickable
-        if (item.includes('LinkedIn:') || item.includes('Mastodon:') || item.includes('GitHub:')) {
+        if (
+          item.includes('LinkedIn:') ||
+          item.includes('Mastodon:') ||
+          item.includes('GitHub:')
+        ) {
           const urlMatch = item.match(/https?:\/\/[^\s]+/);
           if (urlMatch) {
             const url = urlMatch[0];
@@ -125,3 +132,5 @@ export const TerminalOutput: React.FC<TerminalOutputProps> = ({ history }) => {
     </div>
   );
 };
+
+export default TerminalOutput;
