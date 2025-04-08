@@ -1,5 +1,6 @@
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
+import nextPlugin from '@next/eslint-plugin-next';
 import prettierPlugin from 'eslint-plugin-prettier';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -27,6 +28,7 @@ export default [
     files: ['**/*.{js,jsx,ts,tsx}'],
     plugins: {
       prettier: prettierPlugin,
+      '@next/next': nextPlugin,
     },
     rules: {
       'prettier/prettier': 'error',

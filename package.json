@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",
-    "@eslint/eslintrc": "^3",
+    "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.24.0",
     "@playwright/test": "^1.51.0",
     "@tailwindcss/postcss": "^4",
