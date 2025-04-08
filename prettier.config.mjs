@@ -21,8 +21,6 @@ const config = {
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
   importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
-  // Files to ignore
-  ignore: ['pnpm-lock.yaml'],
 };
 
 export default config;
