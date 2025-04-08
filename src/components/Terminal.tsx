@@ -6,7 +6,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTerminalBoot } from '../hooks/useTerminalBoot';
 import { useTerminalCommands } from '../hooks/useTerminalCommands';
 import { useTerminalInput } from '../hooks/useTerminalInput';
-import { TerminalOutput } from './TerminalOutput';
+import TerminalOutput from './TerminalOutput';
 import { TerminalPrompt } from './TerminalPrompt';
 import ThemeMenu from './ThemeMenu';
 
