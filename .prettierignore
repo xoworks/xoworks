@@ -1,0 +1,22 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Package managers
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Build outputs
+.next/
+out/
+build
+dist
+
+# Cache
+.vercel
+.swc/
+
+# Coverage
+coverage 
