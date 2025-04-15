@@ -1,6 +1,6 @@
 'use client';
 
-import { RefObject, useCallback, useRef, useState } from 'react';
+import { RefObject, useCallback, useState } from 'react';
 
 import { TerminalLine } from './useTerminalCommands';
 

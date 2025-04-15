@@ -1,6 +1,6 @@
 'use client';
 
-import React, { RefObject, useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
 import { useTheme } from '../contexts/ThemeContext';
 import { useTerminalBoot } from '../hooks/useTerminalBoot';
@@ -10,14 +10,7 @@ import TerminalOutput from './TerminalOutput';
 import { TerminalPrompt } from './TerminalPrompt';
 import ThemeMenu from './ThemeMenu';
 
-/**
- * Terminal Component
- * - Fixed window size using CSS variables for responsive layout
- * - Resolved TypeScript type issues with RefObject typing
- * - Enhanced focus handling for better user experience
- * - Improved theme switching with ThemeMenu component
- */
-export default function Terminal() {
+const Terminal = () => {
   const { currentTheme } = useTheme();
   const [isDisconnected, setIsDisconnected] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -33,7 +26,12 @@ export default function Terminal() {
   }, []);
 
   // Use custom hooks
-  const { isBooting, history, setHistory, rebootTerminal } = useTerminalBoot();
+  const {
+    isBooting,
+    history,
+    setHistory,
+    rebootTerminal: _rebootTerminal,
+  } = useTerminalBoot();
 
   const { availableCommands, processCommand } = useTerminalCommands(
     setHistory,
@@ -168,4 +166,6 @@ export default function Terminal() {
       </div>
     </>
   );
-}
+};
+
+export default Terminal;

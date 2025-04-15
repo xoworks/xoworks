@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 
 import { useTheme } from '../contexts/ThemeContext';
 import contentData from '../data/content.json';
@@ -60,18 +60,7 @@ export const useTerminalCommands = (
       if (baseCmd === 'help') {
         return {
           type: 'output' as const,
-          content: [
-            'Available commands:',
-            'about     - Information about XO_Works',
-            'services  - List of services offered',
-            'contact   - Contact information',
-            'clear     - Clear the terminal',
-            'theme     - Change terminal theme',
-            'man       - Show detailed help for a command',
-            'exit      - Disconnect from terminal session',
-            'poweroff  - Power off the system',
-            'reboot    - Restart the system',
-          ],
+          content: contentData.commands.help.output,
         };
       }
 
