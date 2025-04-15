@@ -1,0 +1,74 @@
+{
+  "companyInfo": {
+    "name": "XO_Works",
+    "tagline": "IT Consulting Solutions",
+    "description": "Helping organizations modernize through digital strategy, cloud solutions, and automation; building smart, scalable tech for the future."
+  },
+  "welcomeMessage": "Welcome to XO_Works. Type 'help' to see available commands.",
+  "commands": {
+    "help": {
+      "description": "Show available commands",
+      "output": [
+        "Available commands:",
+        "",
+        "about     - Information about XO_Works",
+        "services  - List of services offered",
+        "contact   - Contact information",
+        "clear     - Clear the terminal",
+        "theme     - Change terminal theme",
+        "man       - Show detailed help for a command",
+        "exit      - Disconnect from terminal session",
+        "poweroff  - Power off the system",
+        "reboot    - Restart the system",
+        "",
+        "Theme options: classic, dark, light, green, amber, solarized, chicago, synthwave, ubuntu"
+      ]
+    },
+    "about": {
+      "description": "About XO_Works",
+      "output": "XO_Works is a modern IT consulting firm specializing in driving digital innovation and operational efficiency for businesses of all sizes. We help organizations navigate complex technology landscapes through strategic guidance, scalable cloud solutions, and intelligent automation. With a focus on agility, performance, and long-term value, XO_Works partners with clients to build future-ready digital ecosystems."
+    },
+    "services": {
+      "description": "Our services",
+      "output": [
+        "- Digital Transformation & Strategy",
+        "- IT Infrastructure Management",
+        "- Cloud Native Architecture & Migration",
+        "- Automation & Integration Services"
+      ]
+    },
+    "contact": {
+      "description": "Contact information",
+      "output": [
+        "Email: hello@xo.works",
+        "LinkedIn: https://www.linkedin.com/company/xoworks",
+        "Mastodon: https://mastodon.social/@xoworks",
+        "GitHub: https://github.com/xoworks"
+      ]
+    },
+    "clear": {
+      "description": "Clear terminal",
+      "output": ""
+    },
+    "theme": {
+      "description": "Change terminal theme",
+      "output": "Usage: theme [theme-name]. Available themes: classic, dark, light, green, amber, solarized, chicago, synthwave, ubuntu"
+    },
+    "man": {
+      "description": "Show detailed help for a command",
+      "output": "Usage: man [command]. Show detailed manual page for a command."
+    },
+    "exit": {
+      "description": "Disconnect from terminal session",
+      "output": "Disconnecting from session..."
+    },
+    "poweroff": {
+      "description": "Power off the system",
+      "output": "Disconnecting from session..."
+    },
+    "reboot": {
+      "description": "Restart the system",
+      "output": "Restarting system..."
+    }
+  }
+}
