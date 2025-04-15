@@ -11,7 +11,7 @@ const compat = new FlatCompat({
   recommendedConfig: js.configs.recommended,
 });
 
-export default [
+const eslintConfig = [
   js.configs.recommended,
   ...compat.extends(
     'next/core-web-vitals',
@@ -49,23 +49,8 @@ export default [
       },
     },
     rules: {
-      'import/order': [
-        'warn',
-        {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-            'object',
-            'type',
-          ],
-          'newlines-between': 'always',
-          alphabetize: { order: 'asc', caseInsensitive: true },
-        },
-      ],
+      // Disable eslint's import/order in favor of the prettier sort plugin
+      'import/order': 'off',
       'no-unused-vars': [
         'warn',
         {
@@ -123,3 +108,5 @@ export default [
     },
   },
 ];
+
+export default eslintConfig;
