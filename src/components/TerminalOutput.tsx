@@ -1,10 +1,9 @@
 'use client';
 
+/** @jsxImportSource react */
 import type { FC } from 'react';
 
 import { TerminalLine } from '../hooks/useTerminalBoot';
-
-/** @jsxImportSource react */
 
 interface TerminalOutputProps {
   history: TerminalLine[];
