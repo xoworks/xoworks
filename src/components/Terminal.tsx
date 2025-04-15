@@ -24,6 +24,8 @@ const Terminal = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalBodyRef = useRef<HTMLDivElement>(null);
   const initialBootRef = useRef(true);
+  const terminalId = 'main-terminal';
+  const terminalLabelId = 'terminal-header-title';
 
   // Clear session storage on first mount
   useEffect(() => {
@@ -132,11 +134,26 @@ const Terminal = () => {
     [isVisible]
   );
 
+  // Get current status message for screen readers
+  const getStatusMessage = useCallback(() => {
+    if (isDisconnected) {
+      return 'Terminal connection terminated.';
+    }
+    if (isBooting) {
+      return 'Terminal is booting. Please wait.';
+    }
+    return 'Terminal ready for input.';
+  }, [isBooting, isDisconnected]);
+
   // Memoize the terminal content
   const terminalContent = useMemo(() => {
     if (isDisconnected) {
       return (
-        <div className="disconnected-message">
+        <div
+          className="disconnected-message"
+          role="alert"
+          aria-live="assertive"
+        >
           Connection to XO_Works terminated.
         </div>
       );
@@ -172,12 +189,23 @@ const Terminal = () => {
   ]);
 
   return (
-    <>
+    <main>
       <ThemeMenu />
 
-      <div className={terminalContainerClass}>
-        <div className="terminal">
-          <div className="terminal-header">
+      <div
+        className={terminalContainerClass}
+        aria-atomic="false"
+        aria-relevant="additions"
+        aria-live={isBooting ? 'assertive' : 'polite'}
+      >
+        <div
+          className="terminal"
+          role="application"
+          aria-label="XO_Works Terminal Emulator"
+          id={terminalId}
+          aria-describedby={terminalLabelId}
+        >
+          <header className="terminal-header">
             <div className="terminal-buttons">
               <div
                 className="terminal-button terminal-button-close"
@@ -192,21 +220,28 @@ const Terminal = () => {
                 aria-hidden="true"
               ></div>
             </div>
-            <div className="terminal-title">XO_Works Terminal</div>
+            <h1 className="terminal-title" id={terminalLabelId}>
+              XO_Works Terminal
+            </h1>
             <div className="terminal-buttons-spacer" aria-hidden="true"></div>
-          </div>
+          </header>
           <div
             className="terminal-body"
             onClick={handleTerminalClick}
             ref={terminalBodyRef}
             role="region"
             aria-label="Terminal Interface"
+            aria-busy={isBooting}
+            tabIndex={isBooting || isDisconnected ? 0 : -1}
           >
+            <div className="sr-only" aria-live="polite">
+              {getStatusMessage()}
+            </div>
             {terminalContent}
           </div>
         </div>
       </div>
-    </>
+    </main>
   );
 };
 
