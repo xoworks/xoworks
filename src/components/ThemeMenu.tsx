@@ -67,7 +67,12 @@ const ThemeMenu: React.FC = () => {
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <span aria-hidden="true">🎨</span> Theme
+        <span
+          className="theme-color-preview"
+          style={{ backgroundColor: getThemeColor(currentTheme.id) }}
+          aria-hidden="true"
+        ></span>{' '}
+        Theme
       </button>
 
       {isOpen && (
