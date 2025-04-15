@@ -1,9 +1,9 @@
 'use client';
 
 /** @jsxImportSource react */
-import type { FC } from 'react';
+import { FC, memo, useCallback } from 'react';
 
-import { TerminalLine } from '../hooks/useTerminalBoot';
+import { TerminalLine } from '../types';
 
 interface TerminalOutputProps {
   history: TerminalLine[];
@@ -11,7 +11,7 @@ interface TerminalOutputProps {
 
 const TerminalOutput: FC<TerminalOutputProps> = ({ history }) => {
   // Render terminal line content
-  const renderLineContent = (line: TerminalLine) => {
+  const renderLineContent = useCallback((line: TerminalLine) => {
     if (!line || !line.content) return null;
 
     if (Array.isArray(line.content)) {
@@ -113,7 +113,7 @@ const TerminalOutput: FC<TerminalOutputProps> = ({ history }) => {
     }
 
     return line.content;
-  };
+  }, []);
 
   return (
     <div className="terminal-output">
@@ -131,4 +131,5 @@ const TerminalOutput: FC<TerminalOutputProps> = ({ history }) => {
   );
 };
 
-export default TerminalOutput;
+// Memoize the component to prevent unnecessary re-renders
+export default memo(TerminalOutput);

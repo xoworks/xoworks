@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import contentData from '../data/content.json';
 import themesData from '../data/themes.json';
-import { CommandDefinition, CommandHandler, TerminalLine } from '../types';
+import { TerminalLine } from '../types';
 
 export const useTerminalCommands = (
   setHistory: React.Dispatch<React.SetStateAction<TerminalLine[]>>,

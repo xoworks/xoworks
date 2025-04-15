@@ -1,6 +1,13 @@
 'use client';
 
-import { RefObject, useEffect, useRef, useState } from 'react';
+import {
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { useTheme } from '../contexts/ThemeContext';
 import { useTerminalBoot } from '../hooks/useTerminalBoot';
@@ -73,7 +80,7 @@ const Terminal = () => {
 
   // Re-focus input when it loses focus
   useEffect(() => {
-    const handleFocusOut = () => {
+    const handleFocusOut = (_event: MouseEvent) => {
       if (
         !isBooting &&
         !isDisconnected &&
@@ -113,19 +120,62 @@ const Terminal = () => {
   }, [setupGlobalKeyboardShortcuts]);
 
   // Focus input when clicking anywhere in the terminal
-  const handleTerminalClick = () => {
+  const handleTerminalClick = useCallback(() => {
     if (inputRef.current && !isBooting && !isDisconnected) {
       inputRef.current.focus();
     }
-  };
+  }, [isBooting, isDisconnected]);
+
+  // Memoize the terminal class to prevent unnecessary re-renders
+  const terminalContainerClass = useMemo(
+    () => `terminal-container ${isVisible ? 'terminal-appear' : ''}`,
+    [isVisible]
+  );
+
+  // Memoize the terminal content
+  const terminalContent = useMemo(() => {
+    if (isDisconnected) {
+      return (
+        <div className="disconnected-message">
+          Connection to XO_Works terminated.
+        </div>
+      );
+    }
+
+    return (
+      <>
+        {/* Terminal output */}
+        <TerminalOutput history={history} />
+
+        {/* Command input */}
+        {!isBooting && (
+          <TerminalPrompt
+            command={command}
+            setCommand={setCommand}
+            handleCommandSubmit={handleCommandSubmit}
+            handleKeyDown={handleKeyDown}
+            promptSymbol={currentTheme.prompt}
+            inputRef={inputRef as RefObject<HTMLInputElement>}
+          />
+        )}
+      </>
+    );
+  }, [
+    isDisconnected,
+    history,
+    isBooting,
+    command,
+    setCommand,
+    handleCommandSubmit,
+    handleKeyDown,
+    currentTheme.prompt,
+  ]);
 
   return (
     <>
       <ThemeMenu />
 
-      <div
-        className={`terminal-container ${isVisible ? 'terminal-appear' : ''}`}
-      >
+      <div className={terminalContainerClass}>
         <div className="terminal">
           <div className="terminal-header">
             <div className="terminal-buttons">
@@ -152,28 +202,7 @@ const Terminal = () => {
             role="region"
             aria-label="Terminal Interface"
           >
-            {isDisconnected ? (
-              <div className="disconnected-message">
-                Connection to XO_Works terminated.
-              </div>
-            ) : (
-              <>
-                {/* Terminal output */}
-                <TerminalOutput history={history} />
-
-                {/* Command input */}
-                {!isBooting && (
-                  <TerminalPrompt
-                    command={command}
-                    setCommand={setCommand}
-                    handleCommandSubmit={handleCommandSubmit}
-                    handleKeyDown={handleKeyDown}
-                    promptSymbol={currentTheme.prompt}
-                    inputRef={inputRef as RefObject<HTMLInputElement>}
-                  />
-                )}
-              </>
-            )}
+            {terminalContent}
           </div>
         </div>
       </div>

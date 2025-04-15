@@ -1,8 +1,8 @@
 'use client';
 
-import { RefObject, useCallback, useState } from 'react';
+import { RefObject, useCallback, useMemo, useState } from 'react';
 
-import { TerminalLine } from './useTerminalCommands';
+import { TerminalLine } from '../types';
 
 type UseTerminalInputProps = {
   processCommand: (cmd: string) => TerminalLine;
@@ -49,14 +49,15 @@ export const useTerminalInput = ({
 
       // Process command
       const processedCommand = processCommand(command.trim().toLowerCase());
-      setHistory([...newHistory, processedCommand]);
+      const updatedHistory = [...newHistory, processedCommand];
+      setHistory(updatedHistory);
       setCommand('');
 
       // Save new commands to session storage
       if (typeof window !== 'undefined') {
         sessionStorage.setItem(
           'terminal-history',
-          JSON.stringify([...newHistory, processedCommand])
+          JSON.stringify(updatedHistory)
         );
       }
 
@@ -88,6 +89,14 @@ export const useTerminalInput = ({
       ]);
     }
   }, [command, availableCommands, prompt, setHistory]);
+
+  // Memoize the current command history item based on historyIndex
+  const _currentHistoryItem = useMemo(() => {
+    if (historyIndex >= 0 && commandHistory.length > 0) {
+      return commandHistory[commandHistory.length - 1 - historyIndex];
+    }
+    return '';
+  }, [commandHistory, historyIndex]);
 
   // Handle keyboard events
   const handleKeyDown = useCallback(

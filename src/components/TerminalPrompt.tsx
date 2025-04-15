@@ -1,6 +1,6 @@
 'use client';
 
-import React, { RefObject } from 'react';
+import React, { RefObject, memo, useCallback } from 'react';
 
 interface TerminalPromptProps {
   command: string;
@@ -11,7 +11,7 @@ interface TerminalPromptProps {
   inputRef: RefObject<HTMLInputElement>;
 }
 
-export const TerminalPrompt: React.FC<TerminalPromptProps> = ({
+const TerminalPromptComponent: React.FC<TerminalPromptProps> = ({
   command,
   setCommand,
   handleCommandSubmit,
@@ -19,6 +19,14 @@ export const TerminalPrompt: React.FC<TerminalPromptProps> = ({
   promptSymbol,
   inputRef,
 }) => {
+  // Memoize the onChange handler to prevent recreating it on each render
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setCommand(e.target.value);
+    },
+    [setCommand]
+  );
+
   return (
     <form onSubmit={handleCommandSubmit} className="prompt">
       <span className="prompt-symbol" aria-hidden="true">
@@ -29,7 +37,7 @@ export const TerminalPrompt: React.FC<TerminalPromptProps> = ({
         type="text"
         className="command-input"
         value={command}
-        onChange={(e) => setCommand(e.target.value)}
+        onChange={handleChange}
         onKeyDown={handleKeyDown}
         aria-label="Command input"
         autoComplete="off"
@@ -38,3 +46,6 @@ export const TerminalPrompt: React.FC<TerminalPromptProps> = ({
     </form>
   );
 };
+
+export const TerminalPrompt = memo(TerminalPromptComponent);
+TerminalPrompt.displayName = 'TerminalPrompt';
