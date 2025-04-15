@@ -13,6 +13,7 @@ import ThemeMenu from './ThemeMenu';
 const Terminal = () => {
   const { currentTheme } = useTheme();
   const [isDisconnected, setIsDisconnected] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalBodyRef = useRef<HTMLDivElement>(null);
   const initialBootRef = useRef(true);
@@ -23,6 +24,16 @@ const Terminal = () => {
       sessionStorage.removeItem('terminal-history');
       initialBootRef.current = false;
     }
+  }, []);
+
+  // Trigger animation after component mounts
+  useEffect(() => {
+    // Small delay to ensure the animation starts after render
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Use custom hooks
@@ -112,7 +123,9 @@ const Terminal = () => {
     <>
       <ThemeMenu />
 
-      <div className="terminal-container">
+      <div
+        className={`terminal-container ${isVisible ? 'terminal-appear' : ''}`}
+      >
         <div className="terminal">
           <div className="terminal-header">
             <div className="terminal-buttons">
