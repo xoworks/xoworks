@@ -3,11 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import asciiArtData from '../data/ascii-art.json';
-
-export type TerminalLine = {
-  type: 'input' | 'output' | 'error' | 'system';
-  content: string | string[];
-};
+import { TerminalLine } from '../types';
 
 export const useTerminalBoot = () => {
   const [history, setHistory] = useState<TerminalLine[]>([]);

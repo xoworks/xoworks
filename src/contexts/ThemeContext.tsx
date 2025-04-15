@@ -3,23 +3,85 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import themesData from '../data/themes.json';
+import { Theme, ThemeContextType } from '../types';
 
-type Theme = {
-  id: string;
-  name: string;
-  prompt: string;
-};
-
-type ThemeContextType = {
-  currentTheme: Theme;
-  themeList: string[];
-  changeTheme: (themeId: string) => void;
-};
-
-// Create a record of themes from the JSON data
+// Create a record of themes from the JSON data with default colors
 const themes: Record<string, Theme> = {};
+
+// Map of default colors for themes
+const themeColorMap: Record<string, Theme['colors']> = {
+  classic: {
+    background: '#000000',
+    text: '#33ff33',
+    accent: '#00ff00',
+    header: '#272727',
+    border: '#333',
+  },
+  dark: {
+    background: '#121212',
+    text: '#f0f0f0',
+    accent: '#64eda8',
+    header: '#272727',
+    border: '#333',
+  },
+  light: {
+    background: '#ffffff',
+    text: '#333333',
+    accent: '#27ae60',
+    header: '#e0e0e0',
+    border: '#ccc',
+  },
+  green: {
+    background: '#001100',
+    text: '#00ff00',
+    accent: '#33ff33',
+    header: '#002200',
+    border: '#222',
+  },
+  amber: {
+    background: '#100800',
+    text: '#ffb000',
+    accent: '#ffaa00',
+    header: '#201000',
+    border: '#222',
+  },
+  solarized: {
+    background: '#002b36',
+    text: '#839496',
+    accent: '#268bd2',
+    header: '#073642',
+    border: '#333',
+  },
+  chicago: {
+    background: '#0000aa',
+    text: '#aaaaaa',
+    accent: '#ffffff',
+    header: '#0c2956',
+    border: '#333',
+  },
+  synthwave: {
+    background: '#241b2f',
+    text: '#ff7edb',
+    accent: '#f97e72',
+    header: '#34263f',
+    border: '#333',
+  },
+  ubuntu: {
+    background: '#300a24',
+    text: '#ffffff',
+    accent: '#89e033',
+    header: '#484244',
+    border: '#333',
+  },
+};
+
 themesData.themes.forEach((theme) => {
-  themes[theme.id] = theme;
+  themes[theme.id] = {
+    id: theme.id,
+    name: theme.name,
+    prompt: theme.prompt,
+    colors: themeColorMap[theme.id] || themeColorMap.dark,
+  };
 });
 
 const DEFAULT_THEME = 'dark';

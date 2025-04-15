@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { useTheme } from '../contexts/ThemeContext';
 import themesData from '../data/themes.json';
+import { Theme } from '../types';
 
 const ThemeMenu: React.FC = () => {
   const { themeList, changeTheme, currentTheme } = useTheme();
