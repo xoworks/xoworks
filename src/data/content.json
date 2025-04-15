@@ -16,6 +16,10 @@
         "contact   - Contact information",
         "clear     - Clear the terminal",
         "theme     - Change terminal theme",
+        "man       - Show detailed help for a command",
+        "exit      - Disconnect from terminal session",
+        "poweroff  - Power off the system",
+        "reboot    - Restart the system",
         "",
         "Theme options: classic, dark, light, green, amber, solarized, chicago, synthwave, ubuntu"
       ]
@@ -49,6 +53,22 @@
     "theme": {
       "description": "Change terminal theme",
       "output": "Usage: theme [theme-name]. Available themes: classic, dark, light, green, amber, solarized, chicago, synthwave, ubuntu"
+    },
+    "man": {
+      "description": "Show detailed help for a command",
+      "output": "Usage: man [command]. Show detailed manual page for a command."
+    },
+    "exit": {
+      "description": "Disconnect from terminal session",
+      "output": "Disconnecting from session..."
+    },
+    "poweroff": {
+      "description": "Power off the system",
+      "output": "Disconnecting from session..."
+    },
+    "reboot": {
+      "description": "Restart the system",
+      "output": "Restarting system..."
     }
   }
 }
